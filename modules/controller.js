@@ -70,3 +70,12 @@ exports.loginController = async (req, res) => {
     }
 }
 
+exports.showController = async (req, res) => {
+    let token = req.headers.authorization;
+    jwt.verify(token, process.env.SECRET, async function (err, decoded) {
+        console.log('decoded', decoded)
+        let user = await User.findById(decoded.id, 'firstName lastName phonenumber')
+        res.json({ user })
+
+    });
+}
