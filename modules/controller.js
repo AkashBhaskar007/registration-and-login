@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+require('dotenv').config()
 const saltRounds = 10;
-
+const { profileDataService } = require('./service')
 exports.registerController = async (req, res) => {
     let { firstName, lastName, phonenumber, password } = req.body;
     if (!firstName) {
@@ -30,7 +31,7 @@ exports.registerController = async (req, res) => {
         }).then(user => {
             return res.json({
                 message: "User has registered successfully",
-                
+
             })
         }).catch(err => {
             console.log('Error -> ', err);
@@ -70,12 +71,12 @@ exports.loginController = async (req, res) => {
     }
 }
 
-exports.showController = async (req, res) => {
+exports.profileController = async(req, res) => {
     let token = req.headers.authorization;
-    jwt.verify(token, process.env.SECRET, async function (err, decoded) {
-        console.log('decoded', decoded)
-        let user = await User.findById(decoded.id, 'firstName lastName phonenumber')
-        res.json({ user })
+  const profileData = await profileDataService(token)
+    return res.json({
+        message:"Hi user!",
+        data: profileData
+    })
 
-    });
 }

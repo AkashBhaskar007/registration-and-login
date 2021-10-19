@@ -1,11 +1,11 @@
 const router = require('express').Router();
 require('dotenv').config()
 
+
 const {
     registerController,
     loginController,
-    profileController,
-    showController
+    profileController
 
 } = require('../modules/controller');
 
@@ -17,9 +17,6 @@ router.post('/register', registerController);
 router.post('/login', loginController);
 
 
-router.get('/profile', showController);
-
-    
-
+router.get('/profile', profileController); 
 
 module.exports = router;
