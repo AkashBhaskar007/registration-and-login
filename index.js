@@ -5,9 +5,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 require('dotenv').config()
 require('./dbcongif/mongocongfig');
-
-
 const userrouter=require('./routes/userAuth')
+
 app.use('/userAuth', userrouter);
 
 app.listen(process.env.PORT, (err) => {

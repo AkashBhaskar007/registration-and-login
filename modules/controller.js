@@ -29,7 +29,8 @@ exports.registerController = async (req, res) => {
             password: hash
         }).then(user => {
             return res.json({
-                message: "User has registered successfully"
+                message: "User has registered successfully",
+                
             })
         }).catch(err => {
             console.log('Error -> ', err);
@@ -57,7 +58,8 @@ exports.loginController = async (req, res) => {
                     name: user.name
                 }, process.env.SECRET)
                 res.json({
-                    message: "Login Successfull"
+                    message: "Login Successfull",
+                    token
                 })
             } else {
                 res.status(401).json({ message: "Invalid Password!" })
