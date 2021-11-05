@@ -18,6 +18,7 @@ exports.registerController = async (req, res) => {
     if (!password) {
         return res.status(400).json({ message: "password is required!" })
     }
+    console.log('HELLO');
     let user = await User.findOne({ phonenumber })
     if (user) {
         return res.status(400).json({ message: "Phone number already in use!" })
@@ -50,6 +51,7 @@ exports.loginController = async (req, res) => {
     if (!password) {
         return res.status(400).json({ message: "password is required!" })
     }
+    console.log('heyy!');
     let user = await User.findOne({ phonenumber })
     if (user) {
         bcrypt.compare(password, user.password, function (err, result) {
